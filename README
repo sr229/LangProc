@@ -1,0 +1,22 @@
+
+Language Processing Project for CS-1101
+---------------------------------------
+
+This is the working directory tree for Language Processing Project for Ayane Satomi, et al.
+
+Please be noted you need CMake 2.8 to compile this program.
+
+
+About
+---------------------------------------
+
+Language Processing is a the process of parsing a sentence and processes its heuristics to be consumed by the system. This specific program
+is basically this.
+
+While Language Processing is usually done for ML purposes, we have a use for it to parse syntax for other things.
+
+
+Copyright
+---------------------------------------
+
+Copyright 2019 (c) Ayane Satomi, et al. Licensed under MIT.
