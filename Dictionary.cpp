@@ -67,10 +67,5 @@ bool Dictionary::isWithinDictionary(std::string token)
 	bool nounCheck = std::find(dict.nouns.begin(), dict.nouns.end(), token) != dict.nouns.end();
 	bool verbCheck = std::find(dict.verbs.begin(), dict.verbs.end(), token) != dict.verbs.end();
 
-	if (adjCheck && nounCheck && verbCheck)
-	{
-		return false;
-	}
-	
-	return true;
+	return !(adjCheck && nounCheck && verbCheck);
 }
