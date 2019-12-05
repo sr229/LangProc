@@ -38,15 +38,39 @@ bool Dictionary::isTokenAdj(std::string token)
 
 bool Dictionary::isTokenNoun(std::string token)
 {
-	//TODO
+	if (std::find(Dictionary::nouns.begin(), Dictionary::nouns.end(), token) != Dictionary::adjectives.end())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 bool Dictionary::isTokenVerb(std::string token)
 {
-	//TODO
+	if (std::find(Dictionary::verbs.begin(), Dictionary::verbs.end(), token) != Dictionary::verbs.end())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 bool Dictionary::isWithinDictionary(std::string token)
 {
-	//TODO
+	Dictionary dict;
+	bool adjCheck = std::find(dict.adjectives.begin(), dict.adjectives.end(), token) != dict.adjectives.end();
+	bool nounCheck = std::find(dict.nouns.begin(), dict.nouns.end(), token) != dict.nouns.end();
+	bool verbCheck = std::find(dict.verbs.begin(), dict.verbs.end(), token) != dict.verbs.end();
+
+	if (adjCheck && nounCheck && verbCheck)
+	{
+		return false;
+	}
+	
+	return true;
 }
