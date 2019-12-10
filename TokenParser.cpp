@@ -41,7 +41,7 @@ std::vector<std::string> TokenParser::getTokens(std::string input)
 bool TokenParser::isTokenAlphaNumeric(std::string input)
 {
 	// its easier to do it in regex since we're matching a whole lot of tokens.
-	std::regex alphaNumericRegex("[^a-zA-Z\d\s:]");
+	std::regex alphaNumericRegex("^[a-z0-9\\s]+");
 
 	if (!std::regex_match(input, alphaNumericRegex))
 	{
