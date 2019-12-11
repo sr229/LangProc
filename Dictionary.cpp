@@ -46,11 +46,11 @@ bool Dictionary::isTokenAdj(std::string token)
 {
 	if (std::find(Dictionary::adjectives.begin(), Dictionary::adjectives.end(), token) != Dictionary::adjectives.end())
 	{
-		return false;
+		return true;
 	}
 	else
 	{
-		return true;
+		return false;
 	}
 }
 
@@ -58,11 +58,11 @@ bool Dictionary::isTokenPronoun(std::string token)
 {
 	if (std::find(Dictionary::pronouns.begin(), Dictionary::pronouns.end(), token) != Dictionary::pronouns.end())
 	{
-		return false;
+		return true;
 	}
 	else
 	{
-		return true;
+		return false;
 	}
 }
 
@@ -70,11 +70,11 @@ bool Dictionary::isTokenNoun(std::string token)
 {
 	if (std::find(Dictionary::nouns.begin(), Dictionary::nouns.end(), token) != Dictionary::adjectives.end())
 	{
-		return false;
+		return true;
 	}
 	else
 	{
-		return true;
+		return false;
 	}
 }
 
@@ -82,11 +82,11 @@ bool Dictionary::isTokenVerb(std::string token)
 {
 	if (std::find(Dictionary::verbs.begin(), Dictionary::verbs.end(), token) != Dictionary::verbs.end())
 	{
-		return false;
+		return true;
 	}
 	else
 	{
-		return true;
+		return false;
 	}
 }
 
@@ -94,11 +94,11 @@ bool Dictionary::isTokenPrepoistion(std::string token)
 {
 	if (std::find(Dictionary::prepositions.begin(), Dictionary::prepositions.end(), token) != Dictionary::prepositions.end())
 	{
-		return false;
+		return true;
 	}
 	else
 	{
-		return true;
+		return false;
 	}
 }
 
@@ -106,11 +106,11 @@ bool Dictionary::isTokenConjunction(std::string token)
 {
 	if (std::find(Dictionary::conjunctions.begin(), Dictionary::conjunctions.end(), token) != Dictionary::conjunctions.end())
 	{
-		return false;
+		return true;
 	}
 	else
 	{
-		return true;
+		return false;
 	}
 }
 
@@ -121,6 +121,8 @@ bool Dictionary::isWithinDictionary(std::string token)
 	bool nounCheck = std::find(dict.nouns.begin(), dict.nouns.end(), token) != dict.nouns.end();
 	bool verbCheck = std::find(dict.verbs.begin(), dict.verbs.end(), token) != dict.verbs.end();
 	bool pronounCheck = std::find(Dictionary::pronouns.begin(), Dictionary::pronouns.end(), token) != Dictionary::pronouns.end();
+	bool conjunctionCheck = std::find(Dictionary::conjunctions.begin(), Dictionary::conjunctions.end(), token) != Dictionary::conjunctions.end();
+	bool prepositionCheck = std::find(Dictionary::prepositions.begin(), Dictionary::prepositions.end(), token) != Dictionary::prepositions.end();
 
-	return !(adjCheck && nounCheck && verbCheck && pronounCheck);
+	return !(adjCheck && nounCheck && verbCheck && pronounCheck && conjunctionCheck && prepositionCheck);
 }
