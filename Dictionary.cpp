@@ -6,24 +6,39 @@ void Dictionary::init()
 	std::ifstream verbsDictFile("dictionary_verbs.txt");
 	std::ifstream nounsDictFile("dictionary_nouns.txt");
 	std::ifstream pronounsDictFile("dictionary_pronouns.txt");
+	std::ifstream conjDictFile("dictionary_conjunctions.txt");
+	std::ifstream prepDictFile("dictionary_prepositions.txt");
 
-	if (adjDictFile.good() && verbsDictFile.good() && nounsDictFile.good() && pronounsDictFile.good())
+	if (adjDictFile.good() && verbsDictFile.good() && nounsDictFile.good() && pronounsDictFile.good() && conjDictFile.good() && prepDictFile.good())
 	{
 		
 		std::string currentAdJStream;
 		std::string currentNounStream;
 		std::string currentVerbStream;
 		std::string currentPronounStream;
+		std::string currentConjunctionStream;
+		std::string currentPrepositionStream;
 
 		// stream it to the vectors
 		// hopefully it doesn't cause a big ass leak >_<
-		while (adjDictFile >> currentAdJStream && verbsDictFile >> currentVerbStream && nounsDictFile >> currentNounStream && pronounsDictFile >> currentPronounStream)
+		while (adjDictFile >> currentAdJStream && 
+			   verbsDictFile >> currentVerbStream 
+			   && nounsDictFile >> currentNounStream 
+			   && pronounsDictFile >> currentPronounStream
+			   && conjDictFile >> currentConjunctionStream
+			   && prepDictFile >> currentPrepositionStream)
 		{
 			Dictionary::nouns.push_back(currentNounStream);
 			Dictionary::adjectives.push_back(currentAdJStream);
 			Dictionary::verbs.push_back(currentVerbStream);
 			Dictionary::pronouns.push_back(currentPronounStream);
+			Dictionary::conjunctions.push_back(currentConjunctionStream);
+			Dictionary::prepositions.push_back(currentPrepositionStream);
 		}
+	}
+	else
+	{
+		throw std::invalid_argument("One or more of the required files is missing!");
 	}
 }
 
@@ -66,6 +81,30 @@ bool Dictionary::isTokenNoun(std::string token)
 bool Dictionary::isTokenVerb(std::string token)
 {
 	if (std::find(Dictionary::verbs.begin(), Dictionary::verbs.end(), token) != Dictionary::verbs.end())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool Dictionary::isTokenPrepoistion(std::string token)
+{
+	if (std::find(Dictionary::prepositions.begin(), Dictionary::prepositions.end(), token) != Dictionary::prepositions.end())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+bool Dictionary::isTokenConjunction(std::string token)
+{
+	if (std::find(Dictionary::conjunctions.begin(), Dictionary::conjunctions.end(), token) != Dictionary::conjunctions.end())
 	{
 		return false;
 	}

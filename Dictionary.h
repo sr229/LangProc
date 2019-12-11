@@ -14,6 +14,8 @@ public:
 	bool isTokenAdj(std::string token);
 	bool isTokenNoun(std::string token);
 	bool isTokenPronoun(std::string token);
+	bool isTokenPrepoistion(std::string token);
+	bool isTokenConjunction(std::string token);
 	bool isWithinDictionary(std::string token);
 
 private:
@@ -21,5 +23,7 @@ private:
 	std::vector<std::string> pronouns;
 	std::vector<std::string> verbs;
 	std::vector<std::string> adjectives;
+	std::vector<std::string> prepositions;
+	std::vector<std::string> conjunctions;
 };
 
