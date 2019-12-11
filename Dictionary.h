@@ -13,10 +13,12 @@ public:
 	bool isTokenVerb(std::string token);
 	bool isTokenAdj(std::string token);
 	bool isTokenNoun(std::string token);
+	bool isTokenPronoun(std::string token);
 	bool isWithinDictionary(std::string token);
 
 private:
 	std::vector<std::string> nouns;
+	std::vector<std::string> pronouns;
 	std::vector<std::string> verbs;
 	std::vector<std::string> adjectives;
 };

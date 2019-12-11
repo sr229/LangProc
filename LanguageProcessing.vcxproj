@@ -163,6 +163,9 @@
   <ItemGroup>
     <ResourceCompile Include="LanguageProcessing.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="dictionary_verbs.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
