@@ -14,10 +14,12 @@ int main()
     TokenParser tp;
 
     // first things first: let's init the Dictionary
-    std::cout << "Reading Dictionary files..." << std::endl;
-    std::cout << std::endl;
+    std::cout << "Reading Dictionary files...";
 
     dict.init();
+    std::cout << "Done!" << std::endl;
+
+    std::cout << std::endl;
 
     std::cout << "Welcome to Project Jisho " << std::endl;
     std::cout << "======================== " << std::endl;
@@ -32,11 +34,20 @@ int main()
 
 
     // let's listen for the output now
-    std::cout << "Please enter your sentence (5 words maximum): ";
+    std::cout << "Please enter your sentence (5 words maximum, enter 'e' to exit): ";
     std::getline(std::cin, rawSentence);
 
-    // now this is where the fun part begins
-    // well at least that's how I learned it to be...
-    std::vector<std::string> processedSentence = tp.getTokens((std::string)rawSentence);
-
+    if (rawSentence != "exit")
+    {
+        while (rawSentence != "exit")
+        {
+            // now this is where the fun part begins
+            // well at least that's how I learned it to be...
+            auto processedSentence = tp.getTokens((std::string)rawSentence);
+        }
+    }
+    else
+    {
+        return 0;
+    }
 }
