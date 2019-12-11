@@ -12,27 +12,21 @@
 std::vector<std::string> TokenParser::getTokens(std::string input)
 {
 	std::vector<std::string> tokens;
-	std::vector<std::string> discardedTokens;
-	std::stringstream tokenStream(input);
-	std::string intermediate;
+	std::regex word_regex("(\\w+)");
+	auto words_begin = std::sregex_iterator(input.begin(), input.end(), word_regex);
+	auto words_end = std::sregex_iterator();
 
-	while (std::getline(tokenStream, intermediate))
+	// we split the words using a regex-based approach, then feed it to a vector.
+	// How this works is basically the regex matches all known words, removing non alphanumeric characters.
+	// then iterates over all that matched and is pushed into the vector.
+	for (std::sregex_iterator i = words_begin; i != words_end; ++i)
 	{
-		// check if our sentences has punctuation marks. 
-		// if we do, feed it to a throwaway vector we can clear out later.
-		if (!TokenParser::isTokenAlphaNumeric(intermediate))
-		{
-			discardedTokens.push_back(intermediate);
-		}
-		else
-		{
-			tokens.push_back(intermediate);
-		}
+		std::smatch match = *i;
+		std::string matched_tokens = match.str();
 
+		tokens.push_back(matched_tokens);
 	}
 
-	// clear out the discarded tokens since we don't need them.
-	discardedTokens.clear();
 	return tokens;
 }
 
