@@ -2,15 +2,23 @@
 
 void Dictionary::init()
 {
-	std::ifstream adjDictFile("dictionary_adjectives.txt");
-	std::ifstream verbsDictFile("dictionary_verbs.txt");
-	std::ifstream nounsDictFile("dictionary_nouns.txt");
-	std::ifstream pronounsDictFile("dictionary_pronouns.txt");
-	std::ifstream conjDictFile("dictionary_conjunctions.txt");
-	std::ifstream prepDictFile("dictionary_prepositions.txt");
+	namespace fs = std::filesystem;
+	
+	// we'll read from the files. This'll take a while.
+	fs::path rawPath = fs::current_path();
+	std::string cwd = rawPath.string();
+
+
+	std::ifstream adjDictFile(cwd + "\\dictionary_adjectives.txt");
+	std::ifstream verbsDictFile(cwd + "\\dictionary_verbs.txt");
+	std::ifstream nounsDictFile(cwd + "\\dictionary_nouns.txt");
+	std::ifstream pronounsDictFile(cwd + "\\dictionary_pronouns.txt");
+	std::ifstream conjDictFile(cwd + "\\dictionary_conjunctions.txt");
+	std::ifstream prepDictFile(cwd + "\\dictionary_preposition.txt");
 
 	if (adjDictFile.good() && verbsDictFile.good() && nounsDictFile.good() && pronounsDictFile.good() && conjDictFile.good() && prepDictFile.good())
 	{
+
 		std::string currentAdJStream;
 		std::string currentNounStream;
 		std::string currentVerbStream;
@@ -48,80 +56,39 @@ void Dictionary::init()
 	}
 	else
 	{
-		throw std::invalid_argument("One or more of the required files is missing!");
+		std::cout << "Cannot read dictionary files! Program will now exit." << std::endl;
+		throw 127;
 	}
 }
 
 bool Dictionary::isTokenAdj(std::string token)
 {
-	if (std::find(Dictionary::adjectives.begin(), Dictionary::adjectives.end(), token) != Dictionary::adjectives.end())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return (std::find(Dictionary::adjectives.begin(), Dictionary::adjectives.end(), token) != Dictionary::adjectives.end());
 }
 
 bool Dictionary::isTokenPronoun(std::string token)
 {
-	if (std::find(Dictionary::pronouns.begin(), Dictionary::pronouns.end(), token) != Dictionary::pronouns.end())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return (std::find(Dictionary::pronouns.begin(), Dictionary::pronouns.end(), token) != Dictionary::pronouns.end());
 }
 
 bool Dictionary::isTokenNoun(std::string token)
 {
-	if (std::find(Dictionary::nouns.begin(), Dictionary::nouns.end(), token) != Dictionary::adjectives.end())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return (std::find(Dictionary::nouns.begin(), Dictionary::nouns.end(), token) != Dictionary::adjectives.end());
 }
 
 bool Dictionary::isTokenVerb(std::string token)
 {
-	if (std::find(Dictionary::verbs.begin(), Dictionary::verbs.end(), token) != Dictionary::verbs.end())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return (std::find(Dictionary::verbs.begin(), Dictionary::verbs.end(), token) != Dictionary::verbs.end());
 }
 
-bool Dictionary::isTokenPrepoistion(std::string token)
+bool Dictionary::isTokenPreposition(std::string token)
 {
-	if (std::find(Dictionary::prepositions.begin(), Dictionary::prepositions.end(), token) != Dictionary::prepositions.end())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return (std::find(Dictionary::prepositions.begin(), Dictionary::prepositions.end(), token) != Dictionary::prepositions.end());
 }
 
 bool Dictionary::isTokenConjunction(std::string token)
 {
-	if (std::find(Dictionary::conjunctions.begin(), Dictionary::conjunctions.end(), token) != Dictionary::conjunctions.end())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return (std::find(Dictionary::conjunctions.begin(), Dictionary::conjunctions.end(), token) != Dictionary::conjunctions.end());
 }
 
 bool Dictionary::isWithinDictionary(std::string token)
@@ -134,5 +101,5 @@ bool Dictionary::isWithinDictionary(std::string token)
 	bool conjunctionCheck = std::find(Dictionary::conjunctions.begin(), Dictionary::conjunctions.end(), token) != Dictionary::conjunctions.end();
 	bool prepositionCheck = std::find(Dictionary::prepositions.begin(), Dictionary::prepositions.end(), token) != Dictionary::prepositions.end();
 
-	return !(adjCheck && nounCheck && verbCheck && pronounCheck && conjunctionCheck && prepositionCheck);
+	return (adjCheck && nounCheck && verbCheck && pronounCheck && conjunctionCheck && prepositionCheck);
 }

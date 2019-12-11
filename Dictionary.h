@@ -4,7 +4,9 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <stdio.h>
 #include <algorithm>
+#include <filesystem>
 
 class Dictionary
 {
@@ -14,7 +16,7 @@ public:
 	bool isTokenAdj(std::string token);
 	bool isTokenNoun(std::string token);
 	bool isTokenPronoun(std::string token);
-	bool isTokenPrepoistion(std::string token);
+	bool isTokenPreposition(std::string token);
 	bool isTokenConjunction(std::string token);
 	bool isWithinDictionary(std::string token);
 
@@ -25,5 +27,6 @@ private:
 	std::vector<std::string> adjectives;
 	std::vector<std::string> prepositions;
 	std::vector<std::string> conjunctions;
+	std::string getExePath();
 };
 

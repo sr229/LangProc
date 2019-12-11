@@ -37,11 +37,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="LanguageProcessing.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="dictionary_verbs.txt">
       <Filter>Resource Files</Filter>
     </Text>
