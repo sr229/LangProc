@@ -45,5 +45,23 @@
     <Text Include="dictionary_verbs.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="dictionary_adjectives.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="dictionary_articles.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="dictionary_conjunctions.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="dictionary_nouns.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="dictionary_preposition.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="dictionary_pronouns.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

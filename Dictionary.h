@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <array>
 #include <vector>
 #include <fstream>
+#include <sstream>
 #include <algorithm>
 
 class Dictionary

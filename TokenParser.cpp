@@ -16,7 +16,7 @@ std::vector<std::string> TokenParser::getTokens(std::string input)
 	std::stringstream tokenStream(input);
 	std::string intermediate;
 
-	while (tokenStream >> intermediate)
+	while (std::getline(tokenStream, intermediate))
 	{
 		// check if our sentences has punctuation marks. 
 		// if we do, feed it to a throwaway vector we can clear out later.

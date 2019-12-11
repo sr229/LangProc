@@ -11,7 +11,6 @@ void Dictionary::init()
 
 	if (adjDictFile.good() && verbsDictFile.good() && nounsDictFile.good() && pronounsDictFile.good() && conjDictFile.good() && prepDictFile.good())
 	{
-		
 		std::string currentAdJStream;
 		std::string currentNounStream;
 		std::string currentVerbStream;
@@ -19,14 +18,17 @@ void Dictionary::init()
 		std::string currentConjunctionStream;
 		std::string currentPrepositionStream;
 
+
 		// stream it to the vectors
 		// hopefully it doesn't cause a big ass leak >_<
-		while (adjDictFile >> currentAdJStream && 
-			   verbsDictFile >> currentVerbStream 
-			   && nounsDictFile >> currentNounStream 
-			   && pronounsDictFile >> currentPronounStream
-			   && conjDictFile >> currentConjunctionStream
-			   && prepDictFile >> currentPrepositionStream)
+		while (
+			std::getline(adjDictFile, currentAdJStream) 
+			&& std::getline(verbsDictFile, currentVerbStream)
+			&& std::getline(pronounsDictFile, currentPronounStream)
+			&& std::getline(nounsDictFile, currentNounStream)
+			&& std::getline(conjDictFile, currentConjunctionStream)
+			&& std::getline(prepDictFile, currentPrepositionStream)
+			)
 		{
 			Dictionary::nouns.push_back(currentNounStream);
 			Dictionary::adjectives.push_back(currentAdJStream);
@@ -35,6 +37,14 @@ void Dictionary::init()
 			Dictionary::conjunctions.push_back(currentConjunctionStream);
 			Dictionary::prepositions.push_back(currentPrepositionStream);
 		}
+
+		// finish reading, we don't need it anymore.
+		adjDictFile.close();
+		verbsDictFile.close();
+		nounsDictFile.close();
+		pronounsDictFile.close();
+		conjDictFile.close();
+		prepDictFile.close();
 	}
 	else
 	{

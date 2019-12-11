@@ -171,6 +171,12 @@
     <ResourceCompile Include="LanguageProcessing.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="dictionary_adjectives.txt" />
+    <Text Include="dictionary_articles.txt" />
+    <Text Include="dictionary_conjunctions.txt" />
+    <Text Include="dictionary_nouns.txt" />
+    <Text Include="dictionary_preposition.txt" />
+    <Text Include="dictionary_pronouns.txt" />
     <Text Include="dictionary_verbs.txt">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </Text>
