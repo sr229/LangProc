@@ -79,7 +79,7 @@ int main()
                     std::cout << token << "\t\t" << "UNKNOWN" << std::endl;
                 }
             }
-            std::cout << "--------------------------------------" << std::endl;
+            std::cout << "---------------------------------" << std::endl;
             std::cout << std::endl;
 
         }
