@@ -15,6 +15,7 @@ int main()
 
     dict.init();
     
+    std::cout << std::endl;
     std::cout << "Welcome to Project Jisho " << std::endl;
     std::cout << "======================== " << std::endl;
     std::cout << std::endl;
