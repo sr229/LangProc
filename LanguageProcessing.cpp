@@ -13,12 +13,7 @@ int main()
     Dictionary dict;
     TokenParser tp;
 
-    // first things first: let's init the Dictionary
-    std::cout << "Reading Dictionary files...";
-
     dict.init();
-    std::cout << "Done!" << std::endl;
-    std::cout << std::endl;
     
     std::cout << "Welcome to Project Jisho " << std::endl;
     std::cout << "======================== " << std::endl;
@@ -74,6 +69,10 @@ int main()
                 else if (dict.isTokenPreposition(token))
                 {
                     std::cout << token << "\t\t" << "preposition" << std::endl;
+                }
+                else if (dict.isTokenArticle(token))
+                {
+                    std::cout << token << "\t\t" << "article" << std::endl;
                 }
                 else
                 {

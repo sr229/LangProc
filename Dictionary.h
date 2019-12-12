@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <algorithm>
 #include <filesystem>
+#include <iterator>
 
 class Dictionary
 {
@@ -18,6 +19,7 @@ public:
 	bool isTokenPronoun(std::string token);
 	bool isTokenPreposition(std::string token);
 	bool isTokenConjunction(std::string token);
+	bool isTokenArticle(std::string token);
 	bool isWithinDictionary(std::string token);
 
 private:
@@ -27,6 +29,6 @@ private:
 	std::vector<std::string> adjectives;
 	std::vector<std::string> prepositions;
 	std::vector<std::string> conjunctions;
-	std::string getExePath();
+	std::vector<std::string> articles;
 };
 

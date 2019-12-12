@@ -15,8 +15,9 @@ void Dictionary::init()
 	std::ifstream pronounsDictFile(cwd + "\\dictionary_pronouns.txt");
 	std::ifstream conjDictFile(cwd + "\\dictionary_conjunctions.txt");
 	std::ifstream prepDictFile(cwd + "\\dictionary_preposition.txt");
+	std::ifstream articleDictFile(cwd + "\\dictionary_articles.txt");
 
-	if (adjDictFile.good() && verbsDictFile.good() && nounsDictFile.good() && pronounsDictFile.good() && conjDictFile.good() && prepDictFile.good())
+	if (adjDictFile.good() && verbsDictFile.good() && nounsDictFile.good() && pronounsDictFile.good() && conjDictFile.good() && prepDictFile.good() && articleDictFile.good())
 	{
 
 		std::string currentAdJStream;
@@ -25,34 +26,87 @@ void Dictionary::init()
 		std::string currentPronounStream;
 		std::string currentConjunctionStream;
 		std::string currentPrepositionStream;
+		std::string currentArticleStream;
 
+		std::stringstream buf;
 
-		// stream it to the vectors
-		// hopefully it doesn't cause a big ass leak >_<
-		while (
-			std::getline(adjDictFile, currentAdJStream) 
-			&& std::getline(verbsDictFile, currentVerbStream)
-			&& std::getline(pronounsDictFile, currentPronounStream)
-			&& std::getline(nounsDictFile, currentNounStream)
-			&& std::getline(conjDictFile, currentConjunctionStream)
-			&& std::getline(prepDictFile, currentPrepositionStream)
-			)
+		// read adjective file first
+		if (adjDictFile.is_open())
 		{
-			Dictionary::nouns.push_back(currentNounStream);
-			Dictionary::adjectives.push_back(currentAdJStream);
-			Dictionary::verbs.push_back(currentVerbStream);
-			Dictionary::pronouns.push_back(currentPronounStream);
-			Dictionary::conjunctions.push_back(currentConjunctionStream);
-			Dictionary::prepositions.push_back(currentPrepositionStream);
+			std::cout << "READFILE: dictionary_adjectives.txt ";
+			while (adjDictFile >> currentAdJStream && !adjDictFile.eof())
+			{
+				Dictionary::adjectives.push_back(currentAdJStream);
+			}
+
+			std::cout << "\t [DONE]" << std::endl;
 		}
 
-		// finish reading, we don't need it anymore.
-		adjDictFile.close();
-		verbsDictFile.close();
-		nounsDictFile.close();
-		pronounsDictFile.close();
-		conjDictFile.close();
-		prepDictFile.close();
+		if (nounsDictFile.is_open())
+		{
+			std::cout << "READFILE: dictionary_nouns.txt ";
+			while (nounsDictFile >> currentNounStream && !nounsDictFile.eof())
+			{
+				Dictionary::nouns.push_back(currentNounStream);
+			}
+
+			std::cout << "\t [DONE]" << std::endl;
+		}
+
+		if (verbsDictFile.is_open())
+		{
+			std::cout << "READFILE: dictionary_verbs.txt ";
+			while (verbsDictFile >> currentVerbStream && !verbsDictFile.eof())
+			{
+				Dictionary::verbs.push_back(currentVerbStream);
+			}
+
+			std::cout << "\t [DONE]" << std::endl;
+		}
+
+		if (pronounsDictFile.is_open())
+		{
+			std::cout << "READFILE: dictionary_pronouns.txt ";
+			while (pronounsDictFile >> currentPronounStream && !pronounsDictFile.eof())
+			{
+				Dictionary::pronouns.push_back(currentPronounStream);
+			}
+
+			std::cout << "\t [DONE]" << std::endl;
+		}
+
+		if (prepDictFile.is_open())
+		{
+			std::cout << "READFILE: dictionary_preposition.txt ";
+			while (prepDictFile >> currentPrepositionStream && !prepDictFile.eof())
+			{
+				Dictionary::prepositions.push_back(currentPrepositionStream);
+			}
+
+			std::cout << "\t [DONE]" << std::endl;
+		}
+
+		if (conjDictFile.is_open())
+		{
+			std::cout << "READFILE: dictionary_conjunctions.txt ";
+			while (conjDictFile >> currentConjunctionStream && !conjDictFile.eof())
+			{
+				Dictionary::conjunctions.push_back(currentConjunctionStream);
+			}
+
+			std::cout << "\t [DONE]" << std::endl;
+		}
+
+		if (articleDictFile.is_open())
+		{
+			std::cout << "READFILE: dictionary_articles.txt ";
+			while (articleDictFile >> currentArticleStream && !articleDictFile.eof())
+			{
+				Dictionary::articles.push_back(currentArticleStream);
+			}
+
+			std::cout << "\t [DONE]" << std::endl;
+		}
 	}
 	else
 	{
@@ -73,7 +127,7 @@ bool Dictionary::isTokenPronoun(std::string token)
 
 bool Dictionary::isTokenNoun(std::string token)
 {
-	return (std::find(Dictionary::nouns.begin(), Dictionary::nouns.end(), token) != Dictionary::adjectives.end());
+	return (std::find(Dictionary::nouns.begin(), Dictionary::nouns.end(), token) != Dictionary::nouns.end());
 }
 
 bool Dictionary::isTokenVerb(std::string token)
@@ -91,6 +145,12 @@ bool Dictionary::isTokenConjunction(std::string token)
 	return (std::find(Dictionary::conjunctions.begin(), Dictionary::conjunctions.end(), token) != Dictionary::conjunctions.end());
 }
 
+bool Dictionary::isTokenArticle(std::string token)
+{
+	return (std::find(Dictionary::articles.begin(), Dictionary::articles.end(), token) != Dictionary::articles.end());
+}
+
+// DEPRECATED FUNCTION: DO NOT USE.
 bool Dictionary::isWithinDictionary(std::string token)
 {
 	Dictionary dict;
