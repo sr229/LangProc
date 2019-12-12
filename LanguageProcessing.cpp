@@ -18,9 +18,8 @@ int main()
 
     dict.init();
     std::cout << "Done!" << std::endl;
-
     std::cout << std::endl;
-
+    
     std::cout << "Welcome to Project Jisho " << std::endl;
     std::cout << "======================== " << std::endl;
     std::cout << std::endl;
@@ -34,20 +33,19 @@ int main()
 
 
     // let's listen for the output now
-    std::cout << "Please enter your sentence (5 words maximum, enter 'e' to exit): ";
-    std::getline(std::cin, rawSentence);
+    while (true)
+    {
+        std::cout << "Please enter your sentence (5 words maximum, enter e to exit): ";
+        std::getline(std::cin, rawSentence);
 
-    if (rawSentence != "exit")
-    {
-        while (rawSentence != "exit")
+        if (rawSentence != "e")
         {
-            // now this is where the fun part begins
-            // well at least that's how I learned it to be...
-            auto processedSentence = tp.getTokens((std::string)rawSentence);
+            // TODO: put token processing here.
+            auto tokens = tp.getTokens(rawSentence);
         }
-    }
-    else
-    {
-        return 0;
+        else
+        {
+            break;
+        }
     }
 }
