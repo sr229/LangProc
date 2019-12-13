@@ -19,7 +19,6 @@ public:
 	bool isTokenPreposition(std::string token);
 	bool isTokenConjunction(std::string token);
 	bool isTokenArticle(std::string token);
-	bool isWithinDictionary(std::string token);
 
 private:
 	std::vector<std::string> nouns;

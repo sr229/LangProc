@@ -17,6 +17,7 @@ void Dictionary::init()
 	std::ifstream prepDictFile(cwd + "\\dictionary_preposition.txt");
 	std::ifstream articleDictFile(cwd + "\\dictionary_articles.txt");
 
+	// make sure the files are good before we even read them.
 	if (adjDictFile.good() && verbsDictFile.good() && nounsDictFile.good() && pronounsDictFile.good() && conjDictFile.good() && prepDictFile.good() && articleDictFile.good())
 	{
 
@@ -30,21 +31,29 @@ void Dictionary::init()
 
 		std::stringstream buf;
 
-		// read adjective file first
+		// read files individually
+
+		std::cout << "READFILE: dictionary_adjectives.txt ";
 		if (adjDictFile.is_open())
 		{
-			std::cout << "READFILE: dictionary_adjectives.txt ";
 			while (adjDictFile >> currentAdJStream && !adjDictFile.eof())
 			{
+				// we do the same for each vector, reading files is FIFO as always 
+				// Note: FIFO means First In, First Out
 				Dictionary::adjectives.push_back(currentAdJStream);
 			}
 
 			std::cout << "\t [DONE]" << std::endl;
 		}
+		else
+		{
+			std::cout << "\t [FAIL]" << std::endl;
+			throw 3;
+		}
 
+		std::cout << "READFILE: dictionary_nouns.txt ";
 		if (nounsDictFile.is_open())
 		{
-			std::cout << "READFILE: dictionary_nouns.txt ";
 			while (nounsDictFile >> currentNounStream && !nounsDictFile.eof())
 			{
 				Dictionary::nouns.push_back(currentNounStream);
@@ -52,10 +61,15 @@ void Dictionary::init()
 
 			std::cout << "\t [DONE]" << std::endl;
 		}
+		else
+		{
+			std::cout << "\t [FAIL]" << std::endl;
+			throw 3;
+		}
 
+		std::cout << "READFILE: dictionary_verbs.txt ";
 		if (verbsDictFile.is_open())
 		{
-			std::cout << "READFILE: dictionary_verbs.txt ";
 			while (verbsDictFile >> currentVerbStream && !verbsDictFile.eof())
 			{
 				Dictionary::verbs.push_back(currentVerbStream);
@@ -63,10 +77,15 @@ void Dictionary::init()
 
 			std::cout << "\t [DONE]" << std::endl;
 		}
+		else
+		{
+			std::cout << "\t [FAIL]" << std::endl;
+			throw 3;
+		}
 
+		std::cout << "READFILE: dictionary_pronouns.txt ";
 		if (pronounsDictFile.is_open())
 		{
-			std::cout << "READFILE: dictionary_pronouns.txt ";
 			while (pronounsDictFile >> currentPronounStream && !pronounsDictFile.eof())
 			{
 				Dictionary::pronouns.push_back(currentPronounStream);
@@ -74,10 +93,15 @@ void Dictionary::init()
 
 			std::cout << "\t [DONE]" << std::endl;
 		}
+		else
+		{
+			std::cout << "\t [FAIL]" << std::endl;
+			throw 3;
+		}
 
+		std::cout << "READFILE: dictionary_preposition.txt ";
 		if (prepDictFile.is_open())
 		{
-			std::cout << "READFILE: dictionary_preposition.txt ";
 			while (prepDictFile >> currentPrepositionStream && !prepDictFile.eof())
 			{
 				Dictionary::prepositions.push_back(currentPrepositionStream);
@@ -85,10 +109,15 @@ void Dictionary::init()
 
 			std::cout << "\t [DONE]" << std::endl;
 		}
+		else
+		{
+			std::cout << "\t [FAIL]" << std::endl;
+			throw 3;
+		}
 
+		std::cout << "READFILE: dictionary_conjunctions.txt ";
 		if (conjDictFile.is_open())
 		{
-			std::cout << "READFILE: dictionary_conjunctions.txt ";
 			while (conjDictFile >> currentConjunctionStream && !conjDictFile.eof())
 			{
 				Dictionary::conjunctions.push_back(currentConjunctionStream);
@@ -96,10 +125,16 @@ void Dictionary::init()
 
 			std::cout << "\t [DONE]" << std::endl;
 		}
+		else
+		{
+			std::cout << "\t [FAIL]" << std::endl;
+			throw 3;
+		}
 
+		std::cout << "READFILE: dictionary_articles.txt ";
 		if (articleDictFile.is_open())
 		{
-			std::cout << "READFILE: dictionary_articles.txt ";
+			
 			while (articleDictFile >> currentArticleStream && !articleDictFile.eof())
 			{
 				Dictionary::articles.push_back(currentArticleStream);
@@ -107,6 +142,18 @@ void Dictionary::init()
 
 			std::cout << "\t [DONE]" << std::endl;
 		}
+		else
+		{
+			std::cout << "\t [FAIL]" << std::endl;
+			throw 3;
+		}
+
+		std::cout << std::endl;
+		std::cout << "Registered " << Dictionary::nouns.size() << " noun(s)." << std::endl;
+		std::cout << "Registered " << Dictionary::adjectives.size() << " adjective(s)." << std::endl;
+		std::cout << "Registered " << Dictionary::pronouns.size() << " pronoun(s)." << std::endl;
+		std::cout << "Registered " << Dictionary::prepositions.size() << " preposition(s)." << std::endl;
+		std::cout << "Registered " << Dictionary::verbs.size() << " verb(s)." << std::endl;
 	}
 	else
 	{
@@ -148,18 +195,4 @@ bool Dictionary::isTokenConjunction(std::string token)
 bool Dictionary::isTokenArticle(std::string token)
 {
 	return (std::find(Dictionary::articles.begin(), Dictionary::articles.end(), token) != Dictionary::articles.end());
-}
-
-// DEPRECATED FUNCTION: DO NOT USE.
-bool Dictionary::isWithinDictionary(std::string token)
-{
-	Dictionary dict;
-	bool adjCheck = std::find(dict.adjectives.begin(), dict.adjectives.end(), token) != dict.adjectives.end();
-	bool nounCheck = std::find(dict.nouns.begin(), dict.nouns.end(), token) != dict.nouns.end();
-	bool verbCheck = std::find(dict.verbs.begin(), dict.verbs.end(), token) != dict.verbs.end();
-	bool pronounCheck = std::find(Dictionary::pronouns.begin(), Dictionary::pronouns.end(), token) != Dictionary::pronouns.end();
-	bool conjunctionCheck = std::find(Dictionary::conjunctions.begin(), Dictionary::conjunctions.end(), token) != Dictionary::conjunctions.end();
-	bool prepositionCheck = std::find(Dictionary::prepositions.begin(), Dictionary::prepositions.end(), token) != Dictionary::prepositions.end();
-
-	return (adjCheck && nounCheck && verbCheck && pronounCheck && conjunctionCheck && prepositionCheck);
 }

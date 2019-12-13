@@ -38,7 +38,7 @@ int main()
         {
             // process token
             auto tokens = tp.getTokens(rawSentence);
-            //...
+            int lastTokenCount = 0;
 
             std::cout << "Sentence Analysis: " << std::endl;
             std::cout << "=================================" << std::endl;
@@ -47,6 +47,9 @@ int main()
 
             for (const auto& token : tokens)
             {
+                int presentTokenCount = token.size() + lastTokenCount;
+                lastTokenCount = presentTokenCount;
+
                 if (dict.isTokenAdj(token))
                 {
                     std::cout << token << "\t\t" << "adjective" << std::endl;
@@ -82,7 +85,10 @@ int main()
             }
             std::cout << "---------------------------------" << std::endl;
             std::cout << std::endl;
-
+            std::cout << "Statistics:";
+            std::cout << std::endl;
+            std::cout << "Words: " << tokens.size() << std::endl;
+            std::cout << "Letters: " << lastTokenCount << std::endl;
         }
         else
         {
